@@ -43,8 +43,8 @@ class Network(nn.Module):
         self.convs = []
         self.convs.append(ConvLayer(NUM_CHANNELS, 32, kernel_size=5))
         self.convs.append(ConvLayer(32, 64, kernel_size=5))
-        conv_output_size, _ = get_convnet_output_size(self.convs)
-        self.fully_connected1 = nn.Linear(conv_output_size, 1024)
+        self.conv_output_size, _ = get_convnet_output_size(self.convs)
+        self.fully_connected1 = nn.Linear(self.conv_output_size, 1024)
         self.fully_connected2 = nn.Linear(1024, self.num_classes)
 
     def forward(self, x):
