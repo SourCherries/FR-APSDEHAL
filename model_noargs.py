@@ -51,5 +51,6 @@ class Network(nn.Module):
         for conv in self.convs:
             x = conv(x)
         x = x.view(x.size(0), -1)
-        x = nn.function.relu(self.fully_connected1(x))
+#         x = nn.function.relu(self.fully_connected1(x))
+        x = nn.ReLU(self.fully_connected1(x))
         return nn.functional.log_softmax(self.fully_connected2(x))
