@@ -50,7 +50,9 @@ class Network(nn.Module):
     def forward(self, x):
         for conv in self.convs:
             x = conv(x)
+        print(x.shape)
         x = x.view(x.size(0), -1)
+        print(x.shape)        
 #         x = nn.function.relu(self.fully_connected1(x))
 #         x = nn.ReLU(self.fully_connected1(x))
         x = nn.functional.relu(self.fully_connected1(x))
