@@ -52,7 +52,7 @@ class Network(nn.Module):
     def forward(self, x):
 #         for conv in self.convs:
 #             x = conv(x)
-        for l in enumerate(self.convs):
+        for l in self.convs:
             x = l(x)
         print(x.shape)
         x = x.view(x.size(0), -1)
