@@ -5,20 +5,20 @@ from constants import IMG_SIZE, NUM_CHANNELS
 from torch.autograd import Variable
 
 
-def get_convnet_output_size(network, input_size=IMG_SIZE):
-    input_size = input_size or IMG_SIZE
+# def get_convnet_output_size(network, input_size=IMG_SIZE):
+#     input_size = input_size or IMG_SIZE
 
-    if type(network) != list:
-        network = [network]
+#     if type(network) != list:
+#         network = [network]
 
-    in_channels = network[0].conv1.in_channels
+#     in_channels = network[0].conv1.in_channels
 
-    output = Variable(torch.ones(1, in_channels, input_size, input_size))
-    output.require_grad = False
-    for conv in network:
-        output = conv.forward(output)
+#     output = Variable(torch.ones(1, in_channels, input_size, input_size))
+#     output.require_grad = False
+#     for conv in network:
+#         output = conv.forward(output)
 
-    return np.asscalar(np.prod(output.data.shape)), output.data.size()[2]
+#     return np.asscalar(np.prod(output.data.shape)), output.data.size()[2]
 
 
 class ConvLayer(nn.Module):
@@ -40,12 +40,14 @@ class Network(nn.Module):
     def __init__(self):
         super(Network, self).__init__()
         self.num_classes = 15
-        self.convs = []
-        self.convs.append(ConvLayer(NUM_CHANNELS, 32, kernel_size=5))
-        self.convs.append(ConvLayer(32, 64, kernel_size=5))
-        conv_output_size, _ = get_convnet_output_size(self.convs)
-        self.fully_connected1 = nn.Linear(conv_output_size, 1024)
-        self.fully_connected2 = nn.Linear(1024, self.num_classes)
+#         self.convs = []
+#         self.convs.append(ConvLayer(NUM_CHANNELS, 32, kernel_size=5))
+#         self.convs.append(ConvLayer(32, 64, kernel_size=5))
+#         conv_output_size, _ = get_convnet_output_size(self.convs)
+#         self.fully_connected1 = nn.Linear(conv_output_size, 1024)
+#         self.fully_connected2 = nn.Linear(1024, self.num_classes)
+          #
+          # Determine conv_output_size first
 
     def forward(self, x):
         for conv in self.convs:
