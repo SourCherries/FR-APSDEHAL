@@ -48,6 +48,16 @@ class Network(nn.Module):
 #         self.fully_connected2 = nn.Linear(1024, self.num_classes)
           #
           # Determine conv_output_size first
+        self.convo_stack = nn.Sequential(
+            ConvLayer(NUM_CHANNELS, 32, kernel_size=5),
+            ConvLayer(32, 64, kernel_size=5),
+            
+            # reshape x?
+            # x = x.view(x.size(0), -1)
+            nn.Linear(215296, 1024),
+            nn.ReLU(),
+            nn.Linear(1024, self.num_classes)
+        )
 
     def forward(self, x):
         for conv in self.convs:
